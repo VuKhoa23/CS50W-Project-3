@@ -27,3 +27,6 @@ class Email(models.Model):
             "read": self.read,
             "archived": self.archived
         }
+    
+    def __str__(self) -> str:
+        return f"{self.user} to {self.sender} : {self.subject}"
