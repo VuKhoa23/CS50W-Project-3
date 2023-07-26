@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function send(event) {
-  event.preventDefault();
-
   // get the form
   const recipient = document.querySelector("#compose-recipients").value;
   const subject = document.querySelector("#compose-subject").value;
@@ -93,9 +91,9 @@ async function load_mailbox(mailbox) {
     }</span>
     `;
     if (email.read === true) {
-      element.style.backgroundColor = "white";
-    } else {
       element.style.backgroundColor = "lightgray";
+    } else {
+      element.style.backgroundColor = "white";
     }
     document.querySelector("#emails-view").appendChild(element);
 
@@ -150,9 +148,28 @@ async function view_email(id, mailbox) {
             archived: email.archived ? false : true,
           }),
         });
-        email.archived ? load_mailbox("inbox") : load_mailbox("archive");
+        await load_mailbox("inbox");
       });
       element.appendChild(archiveBtn);
+
+      replyBtn = document.createElement("button");
+      replyBtn.innerHTML = "Reply";
+      replyBtn.style.marginLeft = "5px";
+      replyBtn.className = "btn btn-primary";
+
+      replyBtn.addEventListener("click", async function () {
+        compose_email();
+        // fill in the form
+        document.querySelector("#compose-recipients").value = email.sender;
+        document.querySelector(
+          "#compose-subject"
+        ).value = `Re: ${email.subject}`;
+        document.querySelector(
+          "#compose-body"
+        ).value = `On ${email.timestamp} ${email.sender} wrote: ${email.body} `;
+      });
+
+      element.appendChild(replyBtn);
     }
   } catch (e) {
     console.log(e);
