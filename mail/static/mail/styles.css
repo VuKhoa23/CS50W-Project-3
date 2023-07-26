@@ -1,3 +1,6 @@
 textarea {
-    min-height: 400px;
+  min-height: 400px;
+}
+.email-box:hover {
+  cursor: pointer;
 }
