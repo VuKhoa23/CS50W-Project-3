@@ -19,8 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   load_mailbox("inbox");
 });
 
-function send_email(event) {
-  event.preventDefault();
+async function send_email(event) {
   // get the form
   const recipient = document.querySelector("#compose-recipients").value;
   const subject = document.querySelector("#compose-subject").value;
@@ -28,19 +27,21 @@ function send_email(event) {
   console.log(`${recipient} ${subject} ${body}`);
 
   // call API
-  fetch("/emails", {
-    method: "POST",
-    body: JSON.stringify({
-      recipients: recipient,
-      subject: subject,
-      body: body,
-    }),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-      load_mailbox("sent");
+  try {
+    response = await fetch("/emails", {
+      method: "POST",
+      body: JSON.stringify({
+        recipients: recipient,
+        subject: subject,
+        body: body,
+      }),
     });
+
+    result = await response.json();
+    console.log(result);
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 function compose_email() {
