@@ -38,7 +38,7 @@ async function send_email(event) {
     });
 
     result = await response.json();
-    console.log(result);
+    await load_mailbox("sent");
   } catch (e) {
     console.log(e);
   }
