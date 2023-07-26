@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function send_email(event) {
+  // prevent the form redirect us to the inbox
   event.preventDefault();
   // get the form
   const recipient = document.querySelector("#compose-recipients").value;
