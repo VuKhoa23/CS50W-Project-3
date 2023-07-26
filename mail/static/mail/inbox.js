@@ -12,12 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#compose").addEventListener("click", compose_email);
 
   // Handle compose form submit
-  document.querySelector("#compose-form").addEventListener("submit", send);
+  document
+    .querySelector("#compose-form")
+    .addEventListener("submit", send_email);
   // By default, load the inbox
   load_mailbox("inbox");
 });
 
-async function send(event) {
+async function send_email(event) {
   // get the form
   const recipient = document.querySelector("#compose-recipients").value;
   const subject = document.querySelector("#compose-subject").value;
@@ -166,7 +168,7 @@ async function view_email(id, mailbox) {
         ).value = `Re: ${email.subject}`;
         document.querySelector(
           "#compose-body"
-        ).value = `On ${email.timestamp} ${email.sender} wrote: ${email.body} `;
+        ).value = `On ${email.timestamp} ${email.sender} wrote: ${email.body}\n`;
       });
 
       element.appendChild(replyBtn);

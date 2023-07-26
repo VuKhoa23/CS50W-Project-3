@@ -29,4 +29,4 @@ class Email(models.Model):
         }
     
     def __str__(self) -> str:
-        return f"{self.user} to {self.sender} : {self.subject}"
+        return f"{self.subject}"
