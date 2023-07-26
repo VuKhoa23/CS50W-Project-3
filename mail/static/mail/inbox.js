@@ -26,7 +26,6 @@ async function send_email(event) {
   const recipient = document.querySelector("#compose-recipients").value;
   const subject = document.querySelector("#compose-subject").value;
   const body = document.querySelector("#compose-body").value;
-  console.log(`${recipient} ${subject} ${body}`);
 
   // call API
   try {
@@ -40,7 +39,7 @@ async function send_email(event) {
     });
 
     result = await response.json();
-    console.log(result);
+    load_mailbox("sent");
   } catch (e) {
     console.log(e);
   }
@@ -72,10 +71,8 @@ async function load_mailbox(mailbox) {
   // TOOD
   emails = [];
   try {
-    console.log(mailbox);
     response = await fetch(`/emails/${mailbox}`);
     emails = await response.json();
-    console.log(emails);
   } catch (e) {
     console.log(e);
   }
