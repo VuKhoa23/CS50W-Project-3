@@ -1,4 +1,4 @@
-# CS50W-Project-0
+# CS50W-Project-3
 ## Project 3- CS50w: Mail
 
 A project that I did in my CS50w course
